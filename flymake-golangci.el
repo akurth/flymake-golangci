@@ -46,7 +46,7 @@
   :type '(list string))
 
 (defun flymake-golangci--match-regex (filename)
-  (format "\\(%s\\):\\([0-9]+\\):\\([0-9]+\\): \\(.*\\) \\(([a-zA-Z0-9_]+)\\)"
+  (format "\\(%s\\):\\([0-9]+\\):\\([0-9]+:\\)? \\(.*\\) \\(([a-zA-Z0-9_]+)\\)"
           filename))
 
 (defvar-local flymake-golangci--proc nil)
@@ -92,7 +92,7 @@
                        for (beg . end) = (flymake-diag-region
                                           source
                                           (string-to-number (match-string 2))
-                                          (string-to-number (match-string 3)))
+                                          (string-to-number (or (match-string 3) "0")))
                        when (and beg end)
                        collect (flymake-make-diagnostic source
                                                         beg
