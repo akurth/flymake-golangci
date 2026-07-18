@@ -104,10 +104,10 @@
                   (flymake-log :warning "Canceling obsolete check %s"
                                proc))
               ;; Cleanup the temporary buffer used to hold the check's output.
-              (kill-buffer (process-buffer proc)))))))
-      ;; Send the buffer contents to the process's stdin, followed by EOF.
-      (process-send-region flymake-golangci--proc (point-min) (point-max))
-      (process-send-eof flymake-golangci--proc))))
+              (kill-buffer (process-buffer proc))))))))))
+;; Send the buffer contents to the process's stdin, followed by EOF.
+;;(process-send-region flymake-golangci--proc (point-min) (point-max))
+;;(process-send-eof flymake-golangci--proc))))
 
 ;;;###autoload
 (defun flymake-golangci-load-backend ()
